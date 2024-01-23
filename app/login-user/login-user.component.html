@@ -1,0 +1,50 @@
+
+<div class="absolute inset-0 flex items-center justify-center bg-cover bg-center" 
+     style="background-image:url('/assets/image/bg.png'); background-size: 100%;">
+
+  <div class="max-w-[600px] min-w-[500px] mx-auto p-10 border-2 border-solid border-gray-200 rounded bg-white shadow-2xl shadow-gray-200/50">
+    <div class="text-center">
+      <img class="logo mx-auto" src="/assets/image/IconYodYa.png" alt="Logo">
+      <p class="login text-2xl text-gray-900 dark:text-back m-4" routerLink="/login">เข้าสู่ระบบ</p>
+    </div>
+
+    <form (submit)="login()">
+
+      <div class="mb-4" [ngClass]="{'error' : error_code_student == true}">
+        <label class="text-lg text-gray-600 dark:text-back" for="code_student">รหัสนิสิต</label>
+        <input class="code_student text-line bg-transparent text-black outline-none border-t-0 border-l-0 border-r-0 border-b border-solid border-black px-3 py-1" 
+               type="text" id="code_student" name="code_student" [(ngModel)]="code_student" [maxlength]="8" required>
+        <div *ngIf="error_code_student" class="text-red-500 mt-1 text-sm">รหัสนิสิตน้อยกว่า 8 ตัว</div>
+      </div>
+
+      <div class="mb-4" [ngClass]="{'error' : error_password}">
+        <label class="text-lg text-gray-600 dark:text-back" for="password">รหัสผ่าน</label>
+        <input class="password text-line bg-transparent text-black outline-none border-t-0 border-l-0 border-r-0 border-b border-solid border-black px-3 py-1" 
+               type="password" id="password" name="password" [(ngModel)]="password" required>
+        <div *ngIf="error_password" class="text-red-500 mt-1 text-sm">รหัสผ่านไม่ถูกต้อง</div>
+      </div>
+
+      <div class="flex justify-between">
+          <label class="flex">
+            <input class="remember-password mr-2 mx-auto" type="checkbox" name="remember-password" [(ngModel)]="rememberPassword">
+            <span>จดจำรหัสผ่าน</span>
+          </label>
+        <a href="/forgot-password" class="text">ลืมรหัสผ่าน ?</a>
+      </div>
+
+      <div class="flex">
+        <button  class="text-lg text-white px-14 py-3 rounded-md cursor-pointer mx-auto mt-6 mb-6 bg-bt bt-shadow" 
+                type="submit" [disabled]="!code_student && !password">เข้าสู่ระบบ</button>
+      </div>
+      
+      <div class="mb-4 flex justify-between">
+        <div class="mx-auto pr-0">
+          <span class="text-base mr-8">ยังไม่มีบัญชี ?</span>
+          <a routerLink="/register" class="text">สมัครสมาชิก</a>
+        </div> 
+      </div>
+
+    </form>
+
+  </div>
+</div>
