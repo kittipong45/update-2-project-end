@@ -1,3 +1,5 @@
+import { FormAllergy } from "./form"
+
 export interface ActivityModel{
     id:number
     nameActivity:string  
@@ -26,4 +28,26 @@ export interface AssetModel{
     path:string
     type:number
     activityId:number
+}
+export interface RegisterModel {
+    code_student: string
+    profile:any
+    prefix:string
+    password: string ;
+    confirm_password: string ;
+    first_name: string ;
+    last_name: string ;
+    nick_name: string ;
+    faculty: string ;
+    major: string ;
+    phone: string ;
+    religion: string ;
+    blood_group: string ;
+    allergics : AllergyModel[];
+    roleId : number
+  }
+export interface AllergyModel{
+    id : number
+    code_student:string
+    allergy : string
 }

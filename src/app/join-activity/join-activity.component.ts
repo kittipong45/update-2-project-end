@@ -9,7 +9,7 @@ interface ActiviyJoin extends ActivityModel{
 }
 class FormJoinActivty {
   constructor(student:string,activity:number,isJoin:boolean){
-    console.log(typeof(student))
+    console.log(activity)
     this.student = student
     this.activity = activity
     this.isJoin = isJoin

@@ -9,6 +9,7 @@ import { CalendarComponent } from './calendar/calendar.component';
 import { ViewDataActivytyComponent } from './view-data-activyty/view-data-activyty.component';
 import { JoinActivityComponent } from './join-activity/join-activity.component';
 import { ProfileComponent } from './profile/profile.component';
+import { FormPostActivityComponent } from './form-post-activity/form-post-activity.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginUserComponent },
@@ -17,11 +18,15 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'activity-club', component: ActivityClubComponent },
   { path: 'calendar', component: CalendarComponent },
-  { path: 'view-data-activyty', component: ViewDataActivytyComponent },
+  { path: 'view-data-activity', component: ViewDataActivytyComponent },
   { path: 'join-activity/:idActivity', component: JoinActivityComponent},
   { path: 'profile', component: ProfileComponent },
+  { path: 'form-post',component: FormPostActivityComponent},
+  { path: 'form-post/:idActivity',component: FormPostActivityComponent},
+  { path: '**',redirectTo:'form-post'},
+  // ViewDataActivity
 
-  { path: '**', redirectTo:'login'}
+  // { path: '**', redirectTo:'login'}
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

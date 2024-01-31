@@ -3,6 +3,7 @@ import { ApiUser } from 'src/app/API/api-user';
 import { FormAsset, FormNewActiviy } from 'src/app/model/form';
 import { ActivityModel } from '../../model/model';
 import { Cookie } from 'src/app/Cookie/cookie';
+import { environment } from 'src/environments/environment.development';
 
 @Component({
   selector: 'app-new-activity',
@@ -14,13 +15,13 @@ export class NewActivityComponent implements OnInit {
   @Input('is_update') is_update:boolean = false
   @Output('succeed') succeed = new EventEmitter()
   @Output('show') showPopup = new EventEmitter();
+  @Output('alert') alert = new EventEmitter()
   @Input('data') form!:FormNewActiviy|ActivityModel 
-  localhost = 'https://953b-49-231-19-209.ngrok-free.app/asset/'
+  localhost = environment.localhost_back + '/asset/'
   urlFiles:any[] = []
   fileUpload:FormAsset[] = []
   id_delete:number[] = []
 
-  lenghtAsset = 1
   warn = {
     id: false,
     nameActivity:false,
@@ -34,22 +35,20 @@ export class NewActivityComponent implements OnInit {
   }
   
   ngOnInit(): void {
+    // console.log(this.cookie.get_code_student())
     if (!this.is_update){
       this.form = new FormNewActiviy("user",this.cookie.get_code_student())
     }
     else{
       this.api.get_activity_one(this.form.id).subscribe((data:ActivityModel)=>{
         this.form = data
-        this.lenghtAsset = this.form.asset.length
       })
     }
     console.log(this.form.id)
   }
 
   closePopup() {
-    // this.showPopup = false;
     this.form = new FormNewActiviy('user','')
-  
     this.showPopup.emit()
   } 
   checkDateStartAndDateAnd():boolean{
@@ -58,8 +57,6 @@ export class NewActivityComponent implements OnInit {
       let start = new Date(this.form.dateTimeStart)
       let end = new Date(this.form.dateTimeEnd)
       if (start.getTime() >= end.getTime()){
-        console.log(start.getTime(), end.getTime())
-        console.log(">")
         return false
       }
     }
@@ -113,18 +110,27 @@ export class NewActivityComponent implements OnInit {
     }
     )
   }
-  updateActivity(){
+  async updateActivity(){
     this.api.update_activity(this.form.id,this.form).subscribe((data:any)=>{
       console.log(data)
       // call api
-      if (this.fileUpload.length <= 0){
-        this.closePopup()
-        return ;0
+      if (this.id_delete.length>0){
+        console.log("-----------------")
+        this.id_delete.forEach((id:any)=>{
+          this.api.delete_asset(id,this.form.id).subscribe((data:any)=>{
+            console.log("delete")
+          })
+        })
       }
-      this.api.update_asset(this.fileUpload,this.form.id,this.id_delete).subscribe((data:any)=>{
-        
+      if (this.fileUpload.length <= 0 ){
         this.closePopup()
-      })
+        return ;
+      } else{
+        this.api.update_asset(this.fileUpload,this.form.id).subscribe((data:any)=>{
+          this.closePopup()
+        })
+      }
+
     },(error:any)=>{
       let massege:string[] = error.error.message
       this.showWarm(massege)
@@ -133,13 +139,18 @@ export class NewActivityComponent implements OnInit {
 
   onSelectFiles(event:any){
     let lenghtImg = 0
-    for(let file of event.target.files){
-      this.readURL(file)
-      if (lenghtImg>=4){
-        break
+    let files = event.target.files
+    if (files.length + this.urlFiles.length + this.form.asset.length > 6){
+      this.alert.emit()
+    }
+    else{
+      for(let file of event.target.files){
+        this.readURL(file)
+        if (lenghtImg>=4){
+          break
+        }
       }
     }
-    console.log(this.form.asset)
   }
   readURL(file: any): void {
     if (file) {

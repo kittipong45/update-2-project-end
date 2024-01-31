@@ -1,5 +1,5 @@
 .error input{
-    border-bottom: 2px solid red;
+    border: 2px solid red;
   }
 .error-message {
     color: red;
@@ -7,17 +7,17 @@
     margin-top: 5px;
 }
 .text-line {
-    background-color: transparent;
-    color: black;
-    outline: none;
-    outline-style: none;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    border-bottom: solid black 1px;
-    padding: 3px 10px;
+    /* background-color: transparent; */
+    /* color: black; */
+    /* outline: none; */
+    /* outline-style: none; */
+    /* border-top: none; */
+    /* border-left: none; */
+    /* border-right: none; */
+    /* border-bottom: solid black 1px; */
+    /* padding: 3px 10px; */
     width: 100%; 
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
 }
 
 .bg{
@@ -39,6 +39,7 @@
 }
 .hover\:text-navbar:hover{
     color: rgb(93, 56, 145);
+    /* color: black; */
 }
 
 /* botton */
@@ -49,3 +50,12 @@
     --tw-shadow-color: #5D3891;
     box-shadow: 0 2px 10px -2px rgb(93, 56, 145);
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__trailing {
+    border-color: var(--border-color) !important;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

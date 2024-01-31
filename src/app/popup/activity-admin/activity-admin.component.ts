@@ -16,6 +16,7 @@ export class ActivityAdminComponent implements OnInit {
   @Output('succeed') succeed = new EventEmitter()
   @Output('show') showPopup = new EventEmitter();
   @Input('data') form!:FormNewActiviy|ActivityModel 
+  @Output('alert') alert = new EventEmitter()
   localhost = environment.localhost_back + '/asset/'
   urlFiles:any[] = []
   fileUpload:FormAsset[] = []
@@ -140,13 +141,17 @@ export class ActivityAdminComponent implements OnInit {
 
   onSelectFiles(event:any){
     let lenghtImg = 0
-    for(let file of event.target.files){
-      this.readURL(file)
-      if (lenghtImg>=4){
-        break
+    let files = event.target.files
+    if (files.length + this.urlFiles.length + this.form.asset.length > 6){
+      this.alert.emit()
+    }else{
+      for(let file of event.target.files){
+        this.readURL(file)
+        if (lenghtImg>=4){
+          break
+        }
       }
     }
-    console.log(this.form.asset)
   }
   readURL(file: any): void {
     if (file) {

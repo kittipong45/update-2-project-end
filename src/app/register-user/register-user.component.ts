@@ -25,8 +25,8 @@ class Register {
   templateUrl: './register-user.component.html',
   styleUrls: ['./register-user.component.css']
 })
-export class RegisterUserComponent {
 
+export class RegisterUserComponent {
   form: Register = new Register();
   selectedReligion: any;
   customReligion: any;

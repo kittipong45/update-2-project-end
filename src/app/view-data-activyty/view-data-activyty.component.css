@@ -64,7 +64,8 @@ font-weight: bold;
 } */
 .image-1,.image-2{
   width: 484px;
-
+  margin-right: 24px;
+  overflow: hidden;
 
 }
 .all-image,.image-3{

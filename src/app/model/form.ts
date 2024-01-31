@@ -33,3 +33,21 @@ export class FormAllergy{
     code_student:string = ""
     allergy : string = ""
 }
+export class FormRegister {
+    // id :string = ""
+    code_student: string = "";
+    prefix:string=""
+    profile:any
+    password: string = "";
+    confirm_password: string = "";
+    first_name: string = "";
+    last_name: string = "";
+    nick_name: string = "";
+    faculty: string = "";
+    major: string = "";
+    phone: string = "";
+    religion: string = "";
+    blood_group: string = "";
+    allergics : FormAllergy[] = [];
+    roleId : number = 1
+  }

@@ -1,34 +1,3 @@
-// import { Component } from '@angular/core';
-
-// @Component({
-//   selector: 'app-home',
-//   templateUrl: './home.component.html',
-//   styleUrls: ['./home.component.css']
-// })
-// export class HomeComponent {
-//   showPopup: boolean = false;
-//   newActivityName: string = "";
-
-//   togglePopup() {
-//     this.showPopup = !this.showPopup;
-//   }
-//   openPopup() {
-//     this.showPopup = true;
-//   }
-//   closePopup() {
-//     this.showPopup = false;
-//   } 
-//   addActivity() {
-//     console.log("New Activity Name:", this.newActivityName);
-//     this.closePopup();
-//   }
-
-//   editPost() {
-//   }
-//   deletePost() {
-//   }
-// }
-
 import { Component, OnInit } from '@angular/core';
 import { ApiUser } from '../API/api-user';
 import { FormNewActiviy } from '../model/form';
@@ -49,6 +18,7 @@ export class HomeComponent implements OnInit{
   activity_join:ActivityModel[] = []
   select_activity! : ActivityModel
   file_path = 'poster/ce126e4c3443ec2fca1fb4c791038f1f3IMG_0615.jpg'
+  is_display_alert :boolean = false
   togglePopup() {
     this.showPopup = !this.showPopup;
     this.is_update = false
@@ -59,7 +29,9 @@ export class HomeComponent implements OnInit{
     this.showPopup = true
     this.select_activity = this.activity_join[index]
   }
-  
+  showAlert(){
+    this.is_display_alert = true
+  }
   ngOnInit(): void {
     this.loadActivity()
   }

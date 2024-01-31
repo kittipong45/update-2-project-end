@@ -41,7 +41,7 @@
                 <label for="image"  [ngClass]="{'close':form.asset.length > 0 || fileUpload.length > 0}">
                     <div class="box-up-file items-center mt-8 mb-2" >
                         <img class="max-w-16 max-h-16 " src="/assets/image/upload.png"  width="50px">
-                        <input type="file" id="image" style="display: none;" multiple (change)="onSelectFiles($event)">
+                        <input type="file" id="image" accept="image/*" style="display: none;" multiple (change)="onSelectFiles($event)">
                     </div>
                 </label>
                 <div class="images-activity mt-10 min-h-14" *ngIf="form.asset.length > 0 || fileUpload.length > 0">
